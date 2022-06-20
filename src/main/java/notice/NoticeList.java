@@ -66,16 +66,16 @@ public class NoticeList extends HttpServlet {
 			JSONObject json = new JSONObject();
 			request.setAttribute("noticeAmount", amount);
 			
+			
 			json.put("amount", amount);
 			json.put("list", noticeInfoList);
 			
 			output.print(json);
 			output.close();
-			
-			response.sendRedirect("/web/notice/list?pageNumber="+pageNumber);
+//			response.sendRedirect("/web/notice/list.jsp?pageNumber="+pageNumber);
 
 		}
-
+		
 	}
 
 }
