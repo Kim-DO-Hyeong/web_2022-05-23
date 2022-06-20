@@ -12,7 +12,6 @@
 </head>
 <body>
 	<%@ include file="../includes/header.jsp" %>
-	<span>${noticeInfoList }</span>
 	<div id="wrapper">
         <h2>공지사항</h2>
 
@@ -35,9 +34,16 @@
             </div>
             <div class="pagination">
 				<%-- 1. 요청 정보에 들어있는 등록된 공지사항 개수를 사용해서 페이지 네이션 출력 --%>
-				<c:set var="lastPageNumber" value="${noticeAmount / 5 }"/>
+				<c:set var="lastPageNumber" value="${noticeAmount / 5 }" scope="request"/>
+					<%
+						double pageNum = (double) request.getAttribute("lastPageNumber");
+						
+						int pageCount = (int) Math.ceil(pageNum);
+					
+						request.setAttribute("pageCount", pageCount);
+					%>
 					<%-- end에는 값이 들어가야하는 자리 --%>
-					<c:forEach var="pageNumber" begin="1" end="${lastPageNumber }" step="1">
+					<c:forEach var="pageNumber" begin="1" end="${pageCount }" step="1">
 						<span>${pageNumber }</span>
 					</c:forEach>
 					
@@ -47,7 +53,7 @@
 							let clickedPageNumber = $(this).text();
 							console.log(clickedPageNumber);
 							
-							location.href="/web/notice/list.jsp?pageNumber="+clickedPageNumber;
+							location.href="/web/notice/list?pageNumber="+clickedPageNumber;
 						});
 					</script>	
             </div>
@@ -109,7 +115,7 @@
 				
 		
 		$.ajax({
-			url:"/web/notice/list",
+			url:"/web/notice/list	",
 			type:"GET",
 			data:"pageNumber="+pageNumber,
 			
@@ -131,6 +137,8 @@
 // 					let startNumber =전체 공지사항의 개수 -( pageNumber-1 )*5;	
 					let startNumber = noticeInfo.amount -(pageNumber-1)*5;
 					
+					let t_tag ="";
+					
 					for(let i=0; i<noticeInfo.list.length;i++){
 						let title = noticeInfo.list[i].title;
 						let contents = noticeInfo.list[i].contents;
@@ -141,10 +149,13 @@
 // 						let idx = noticeInfo.amount - startNumber+i;
 						
 						let tag = "<div class=\"contents\"><span class=\"order\">"+order+"</span><a href=\"/web/notice/detail.jsp?idx="+idx+"\"><span class=\"title\">"+title+"</span></a></div>";
-						
-						$("#list").append(tag);
+						t_tag = t_tag +tag;
+// 						$("#list").append(tag);
 					}
+					
+					$("#list").html(t_tag);
 				}
+				
 			},
 			error:function(){
 				console.log("에러가 발생하였음");
