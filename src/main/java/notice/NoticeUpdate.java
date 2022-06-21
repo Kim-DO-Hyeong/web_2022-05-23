@@ -40,6 +40,6 @@ public class NoticeUpdate extends HttpServlet {
 		
 		dao.updatedNoticeInfo(updateNoticeInfo);
 		
-		response.sendRedirect("/web/notice/detail.jsp?idx="+idx);
+		response.sendRedirect("/web/notice/detail?idx="+idx);
 	}
 }

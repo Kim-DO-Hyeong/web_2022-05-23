@@ -34,9 +34,9 @@ public class NoticeController extends HttpServlet {
 			
 			request.setAttribute("noticeInfoList", noticeInfoList);
 			
-
-			
-		}
+ 
+				
+		}	
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/notice/list.jsp");
 		rd.forward(request, response);

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.NoticeTblDao;
 import dto.NoticeInfo;
+import util.URL;
 
 /**
  * Servlet implementation class MainController
@@ -38,7 +39,7 @@ public class MainController extends HttpServlet {
 		request.setAttribute("noticeInfoList", noticeInfoList);
 		
 		// 메인페이지로 포워딩 한다
-		RequestDispatcher rd = request.getRequestDispatcher("/main/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(URL.MAIN_PAGE);
 		rd.forward(request, response);
 		
 	}

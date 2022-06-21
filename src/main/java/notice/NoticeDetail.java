@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import service.NoticeService;
 import util.DatabaseManager;
 
-@WebServlet("/notice/detail")
+@WebServlet("/notice/detail/temp")
 public class NoticeDetail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 클라이언트가 전달한 idx 값을 꺼낸다 

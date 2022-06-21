@@ -211,4 +211,6 @@ public class NoticeTblDao {
 		return result;
 	}
 
+	
+	
 }

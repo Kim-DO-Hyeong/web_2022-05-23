@@ -32,7 +32,7 @@ public class NoticeWrite extends HttpServlet {
 		NoticeTblDao dao =new NoticeTblDao();
 		dao.writeNoticeInfo(newNoticeInfo);
 		
-		response.sendRedirect("/web/notice/list.jsp");
+		response.sendRedirect("/web/notice/list?pageNumber=1");
 	}
 
 }

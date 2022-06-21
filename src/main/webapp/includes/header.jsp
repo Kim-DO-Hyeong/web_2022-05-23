@@ -40,7 +40,7 @@
 					
 				<script>
 					$("#join_area").on("click",function(){
-						location.href="/web/notice/form.jsp";
+						location.href="/web/notice/form";
 					});
 				</script>
 		</c:if>
@@ -83,7 +83,7 @@
 		// location.href 를 사용해서 
 		// 회원가입 페이지로 이동하도록 하세요
 		$("#join_btn").on("click",function(){
-			$(location).attr("href","/web/member/join.jsp"); 
+			$(location).attr("href","/web/member/join"); 
 		});
 		
 

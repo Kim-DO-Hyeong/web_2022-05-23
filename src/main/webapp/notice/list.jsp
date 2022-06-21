@@ -1,6 +1,18 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dto.NoticeInfo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+  
+<% 
+	List<NoticeInfo> noticeInfoList =(ArrayList<NoticeInfo>) request.getAttribute("noticeInfoList");
+
+	int noticeInfoAmount = noticeInfoList.size();
+	
+	request.setAttribute("noticeInfoAmount", noticeInfoAmount);
+
+%>
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +33,36 @@
                 <span class="title">제목</span>
             </div>
             <div id="list">
-                <c:forEach items="${noticeInfoList }" var="nthNoticeInfo" varStatus="status">
-                	<c:set var="order" value="${noticeAmount}"/>
-                	
-                	<div class="contents">
-                		<span class="order">${order-status.index}</span>
-                		<a href="/web/notice/detail.jsp?idx=">
-                			<span class="title">${nthNoticeInfo.title}</span>
-                			</a>
-          			</div>
-                </c:forEach>
+                <c:choose>
+					<c:when test="${noticeInfoAmount eq 0 }">                
+		                <%-- noticeInfoList 가 undefined 일때  --%>
+						<div class="contents">
+		                		<span class="order"></span>
+		                		<a href="/web/notice/detail?idx=">
+		                			<span class="title">작성된 공지사항이 없습니다</span>
+		               			</a>
+		          			</div>
+					</c:when>
+					<c:otherwise>
+							<c:set var="startNumber" value="${noticeAmount - ((param['pageNumber']-1) *5)}"/>		
+					
+							<c:forEach items="${noticeInfoList }" var="nthNoticeInfo" varStatus="status">
+		                	<c:set var="order" value="${startNumber - status.index }"/>
+							<c:set var="idx" value="${nthNoticeInfo.noticeId }"/>
+							<c:set var="title" value="${nthNoticeInfo.title }"/>
+		                
+		                	<div class="contents">
+		                		<span class="order">${order}</span>
+		                		<a href="/web/notice/detail?idx=${idx }">
+		                			<span class="title">${title}</span>
+		               			</a>
+		          			</div>
+		                
+		                </c:forEach>
+					
+					</c:otherwise>
+					
+                </c:choose>
             </div>
             <div class="pagination">
 				<%-- 1. 요청 정보에 들어있는 등록된 공지사항 개수를 사용해서 페이지 네이션 출력 --%>
@@ -96,7 +128,7 @@
 // 				// 1번째 ajax -end
 // 			},
 			
-// 			error:function(){
+// 			error:function()
 // 				console.log("에러가 발생함");
 // 			}
 // 		});
@@ -114,53 +146,53 @@
 		// GET 파라미터를 꺼낸다 -end 
 				
 		
-		$.ajax({
-			url:"/web/notice/list	",
-			type:"GET",
-			data:"pageNumber="+pageNumber,
+// 		$.ajax({
+// 			url:"/web/notice/list",
+// 			type:"GET",
+// 			data:"pageNumber="+pageNumber,
 			
-			success:function(noticeInfo){
-				// 2번째 ajax 페이지 번호에 맞는 공지사항 정보 목록을 불러와 출려하는 ajax
-				console.log(noticeInfo);
-				if(noticeInfo == undefined){
-					// 작성된 공지사항이 없습니다 
+// 			success:function(noticeInfo){
+// 				// 2번째 ajax 페이지 번호에 맞는 공지사항 정보 목록을 불러와 출려하는 ajax
+// 				console.log(noticeInfo);
+// 				if(noticeInfo == undefined){
+// 					// 작성된 공지사항이 없습니다 
 				
-					let tag = "<div class=\"contents\"><span class=\"order\"></span><a href=\"#\"><span class=\"title\">작성된 공지사항이 없습니다</span></a></div>";
+// 					let tag = "<div class=\"contents\"><span class=\"order\"></span><a href=\"#\"><span class=\"title\">작성된 공지사항이 없습니다</span></a></div>";
 					
-					$("#list").append(tag);
-				}else{
-					// JSON 에 담겨있는 공지사항 정보들을 샘플에 맞게 출력 
+// 					$("#list").html(tag);
+// 				}else{
+// 					// JSON 에 담겨있는 공지사항 정보들을 샘플에 맞게 출력 
 					
-					// 전체 공지사항의 개수 
+// 					// 전체 공지사항의 개수 
 					
-					// 현재 페이지 
-// 					let startNumber =전체 공지사항의 개수 -( pageNumber-1 )*5;	
-					let startNumber = noticeInfo.amount -(pageNumber-1)*5;
+// 					// 현재 페이지 
+// // 					let startNumber =전체 공지사항의 개수 -( pageNumber-1 )*5;	
+// 					let startNumber = noticeInfo.amount -(pageNumber-1)*5;
 					
-					let t_tag ="";
+// 					let t_tag ="";
 					
-					for(let i=0; i<noticeInfo.list.length;i++){
-						let title = noticeInfo.list[i].title;
-						let contents = noticeInfo.list[i].contents;
-						let idx = noticeInfo.list[i].noticeID;
+// 					for(let i=0; i<noticeInfo.list.length;i++){
+// 						let title = noticeInfo.list[i].title;
+// 						let contents = noticeInfo.list[i].contents;
+// 						let idx = noticeInfo.list[i].noticeID;
 						
-						let order = startNumber-i;
-						// 해당 인데스를 구하는 코드 ( 상세페이지에서 보여줘야할 공지사항의 인덱스 )						
-// 						let idx = noticeInfo.amount - startNumber+i;
+// 						let order = startNumber-i;
+// 						// 해당 인데스를 구하는 코드 ( 상세페이지에서 보여줘야할 공지사항의 인덱스 )						
+// // 						let idx = noticeInfo.amount - startNumber+i;
 						
-						let tag = "<div class=\"contents\"><span class=\"order\">"+order+"</span><a href=\"/web/notice/detail.jsp?idx="+idx+"\"><span class=\"title\">"+title+"</span></a></div>";
-						t_tag = t_tag +tag;
-// 						$("#list").append(tag);
-					}
+// 						let tag = "<div class=\"contents\"><span class=\"order\">"+order+"</span><a href=\"/web/notice/detail?idx="+idx+"\"><span class=\"title\">"+title+"</span></a></div>";
+// 						t_tag = t_tag +tag;
+// // 						$("#list").append(tag);
+// 					}
 					
-					$("#list").html(t_tag);
-				}
+// 					$("#list").html(t_tag);
+// 				}
 				
-			},
-			error:function(){
-				console.log("에러가 발생하였음");
-			}
-		});
+// 			},
+// 			error:function(){
+// 				console.log("에러가 발생하였음");
+// 			}
+// 		});
 	</script>
 
 </body>

@@ -59,7 +59,7 @@
 			data:"id="+$id+"&pw="+$pw+"&name="+$name,
 			// 3. 회원가입 서비스가 성공을 의미하는 상태코드로 응답하면 회원가입 완료 페이지로 이동
 			success:function(){
-				location.href="/web/member/joinSuccess.jsp";
+				location.href="/join/success";
 			},
 			// 4. 회원 가입 서비스가 실패를 의미하는 상태코드로 응답하면 alert 로 "이미 사용중인 아이디입니다 입력"
 			error:function(){

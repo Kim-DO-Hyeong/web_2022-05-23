@@ -27,7 +27,7 @@
 				<div id="notice_list">
 					<c:forEach var="noticeInfo" items="${noticeInfoList }"  >
 						<div class="contents">
-							<a href="/web/notice/detail.jsp?idx=${noticeInfo.noticeId }">
+							<a href="/web/notice/detail?idx=${noticeInfo.noticeId }">
 								<span class="t	itle">${noticeInfo.title}</span>
 							</a>
 						</div>

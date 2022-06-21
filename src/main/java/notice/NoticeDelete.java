@@ -25,6 +25,6 @@ public class NoticeDelete extends HttpServlet {
 		dao.deleteByIdx(idx);
 		
 //		Write.noticeInfoList.remove(idx);
-		response.sendRedirect("/web/notice/list.jsp");
+		response.sendRedirect("/web/notice/list?pageNumber=1");
 	}
 }

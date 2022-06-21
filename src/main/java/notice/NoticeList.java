@@ -72,7 +72,7 @@ public class NoticeList extends HttpServlet {
 			
 			output.print(json);
 			output.close();
-//			response.sendRedirect("/web/notice/list.jsp?pageNumber="+pageNumber);
+//			response.sendRedirect("/web/noticCe/list.jsp?pageNumber="+pageNumber);
 
 		}
 		
