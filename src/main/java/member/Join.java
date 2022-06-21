@@ -16,7 +16,7 @@ import dto.MemberInfo;
 import service.MemberService;
 import util.DatabaseManager;
 
-@WebServlet("/member/join")
+@WebServlet("/member/join/temp")
 public class Join extends HttpServlet {
 	// 서버를 내리기 전까지는 계속 살아있음
 //	public static List<MemberInfo> memberList= new ArrayList<>();

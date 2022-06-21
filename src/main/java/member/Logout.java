@@ -22,7 +22,7 @@ public class Logout extends HttpServlet {
 		//session.removeAttribute("loginUserName");
 		session.invalidate();
 		
-		response.sendRedirect(URL.MAIN_PAGE);
+		response.sendRedirect("/web/main/");
 	
 	
 	}

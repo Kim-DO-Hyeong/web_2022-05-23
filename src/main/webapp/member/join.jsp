@@ -54,7 +54,7 @@
 		// 2. ajax 를 사용해서ㅏ 회원가입 서비스를 요청한다
 		// 	 	 이때, 가져온 사용자가 입력한 아이디, 비밀번호, 이름을 회원가입 서비스로 보낸다 
 		$.ajax({
-			url:"/web/member/join",
+			url:"/web/member/join/temp",
 			type:"POST",
 			data:"id="+$id+"&pw="+$pw+"&name="+$name,
 			// 3. 회원가입 서비스가 성공을 의미하는 상태코드로 응답하면 회원가입 완료 페이지로 이동
