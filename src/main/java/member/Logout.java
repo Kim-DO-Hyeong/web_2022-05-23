@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.URL;
+
 @WebServlet("/member/logout")
 public class Logout extends HttpServlet {
 	
@@ -20,7 +22,7 @@ public class Logout extends HttpServlet {
 		//session.removeAttribute("loginUserName");
 		session.invalidate();
 		
-		response.sendRedirect("/web/main/");
+		response.sendRedirect(URL.MAIN_PAGE);
 	
 	
 	}

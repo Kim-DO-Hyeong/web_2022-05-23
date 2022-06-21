@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import util.URL;
+
 @WebServlet("/notice/form")
 public class NoticeWriterViewController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher rd = request.getRequestDispatcher("/notice/form.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(URL.NOTICE_WRITE_PAGE);
 
 		rd.forward(request, response);
 	}

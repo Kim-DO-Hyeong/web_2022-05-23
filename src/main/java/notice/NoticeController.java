@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.NoticeTblDao;
 import dto.NoticeInfo;
+import util.URL;
 
 @WebServlet("/notice/list")
 public class NoticeController extends HttpServlet {
@@ -38,7 +39,7 @@ public class NoticeController extends HttpServlet {
 				
 		}	
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/notice/list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher(URL.NOTICE_LIST_PAGE);
 		rd.forward(request, response);
 					
 		
